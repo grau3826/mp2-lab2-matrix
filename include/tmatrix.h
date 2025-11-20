@@ -28,13 +28,13 @@ public:
   {
     if (sz == 0)
       throw out_of_range("Vector size should be greater than zero");
-    if (sz > MAX_MATRIX_SIZE) throw out_of_range("sz");
+    if (sz > MAX_VECTOR_SIZE) throw out_of_range("sz");
     pMem = new T[sz]();// {}; // У типа T д.б. констуктор по умолчанию
   }
   TDynamicVector(T* arr, size_t s) : sz(s), pMem(new T[sz])
   {
     assert(arr != nullptr && "TDynamicVector ctor requires non-nullptr arg");
-    if (sz > MAX_MATRIX_SIZE) throw out_of_range("sz");
+    if (sz > MAX_VECTOR_SIZE) throw out_of_range("sz");
     pMem = new T[sz];
     std::copy(arr, arr + sz, pMem);
   }
@@ -80,12 +80,12 @@ public:
   // индексация с контролем
   T& at(size_t ind)
   {
-      if (ind >= sz) throw out_of_range("Index out of range");
+      if (ind >= sz) throw out_of_range("out of range");
       return pMem[ind];
   }
   const T& at(size_t ind) const
   {
-      if (ind >= sz) throw out_of_range("Index out of range");
+      if (ind >= sz) throw out_of_range("out of range");
       return pMem[ind];
   }
 
@@ -229,13 +229,10 @@ public:
       }
   }
 
-
   T& at(size_t i, size_t j)
   {
       if (i >= sz || j >= sz)
-          throw out_of_range("too lagre index");
-      if (i < 0 || j < 0)
-          throw out_of_range("negative index");
+          throw out_of_range("Index out of range");
       return pMem[i][j];
   }
 
